@@ -35,4 +35,4 @@ class TestSimpleServer:
         response = client.get("/bye")
 
         assert response.status_code == 200
-        assert response.json() == {"msg": "Bye bye ok!"}
+        assert response.json() == {"msg": "Bye bye"}
