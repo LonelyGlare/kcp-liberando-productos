@@ -116,7 +116,8 @@ alertmanager:
             *Description:* {{ .Annotations.message }}
             *Graph:* <{{ .GeneratorURL }}|:chart_with_upwards_trend:> *Runbook:* <{{ .Annotations.runbook_url }}|:spiral_note_pad:>
             *Details:*
-            {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+            {{ range .Labels.SortedPairs }} • *{{ .Name }
+            }:* `{{ .Value }}`
             {{ end }}
           {{ end }}
 ## Manages Prometheus and Alertmanager components
@@ -139,6 +140,17 @@ additionalPrometheusRulesMap:
 
           - alert: fastApiConsumingMoreThanRequest
             expr: avg(container_memory_usage_bytes{container="fast-api-webapp"}) by (pod) > avg(kube_pod_container_resource_requests{resource="memory",container="fast-api-webapp"}) by (pod)
+            for: 0m
+            labels:
+              severity: critical
+              alertname: "fast-api-webapp container is consuming more than requested"
+            annotations:
+              summary: Pod {{ $labels.pod }} consuming more than requested
+              description: "Pod more less than request"
+              message: Pod {{ $labels.pod }} is consuming more than requested
+          
+          - alert: fastApiConsumingMoreCPUThanRequest
+            expr: (irate(container_cpu_usage_seconds_total{container="fast-api-webapp"}[5m]) * 100) > avg(kube_pod_container_resource_requests{resource="cpu",container="fast-api-webapp"}) by (pod) * 200
             for: 0m
             labels:
               severity: critical
