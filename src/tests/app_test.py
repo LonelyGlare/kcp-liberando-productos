@@ -30,7 +30,7 @@ class TestSimpleServer:
         assert response.json() == {"msg": "Hello World"}
 
     @pytest.mark.asyncio
-    async def read_main_test(self):
+    async def read_bye_test (self):
         """Tests bye bye point"""
         response = client.get("bye")
 
