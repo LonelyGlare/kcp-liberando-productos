@@ -3,9 +3,9 @@ PYTHON 	= $(VENV)/bin/python3
 PIP		= $(VENV)/bin/pip
 
 # Variables used to configure
-IMAGE_REGISTRY_DOCKERHUB 	?= lonelyglare
+IMAGE_REGISTRY_DOCKERHUB 	?= docker.io
 IMAGE_REGISTRY_GHCR			?= ghcr.io
-IMAGE_REPO					= keepcodingclouddevops7
+IMAGE_REPO					= lonelyglare
 IMAGE_NAME					?= lb-productos-practica
 VERSION						?= develop
 
