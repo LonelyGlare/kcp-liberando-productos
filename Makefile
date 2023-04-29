@@ -6,7 +6,7 @@ PIP		= $(VENV)/bin/pip
 IMAGE_REGISTRY_DOCKERHUB 	?= docker.io
 IMAGE_REGISTRY_GHCR			?= ghcr.io
 IMAGE_REPO					= lonelyglare
-IMAGE_NAME					?= lb-productos-practica
+IMAGE_NAME					?= liberando-productos-AMC
 VERSION						?= derp
 
 # Variables used to configure docker images registries to build and push
@@ -35,10 +35,8 @@ $(VENV)/bin/activate: requirements.txt
 
 .PHONY: docker-build
 docker-build: ## Build image
-	docker build -t $(IMAGE_DOCKER_LATEST) .
-
-
-##-t $(IMAGE_GHCR) -t $(IMAGE_GHRC_LATEST) .
+	docker build -t $(IMAGE_DOCKER_LATEST) -t $(IMAGE_GHRC_LATEST) .
+##-t $(IMAGE_GHCR)
 
 .PHONY: publish
 publish: docker-build ## Publish image
