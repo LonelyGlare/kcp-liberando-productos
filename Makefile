@@ -44,4 +44,4 @@ publish: docker-build ## Publish image
 #	docker push $(IMAGE_DOCKER)
 	docker push $(IMAGE_DOCKER_LATEST)
 #	docker push $(IMAGE_GHCR)
-	docker push $(IMAGE_GHRC_LATEST)
+	docker push $(IMAGE_GHCR_LATEST)
