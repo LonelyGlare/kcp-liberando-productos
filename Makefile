@@ -6,7 +6,7 @@ PIP		= $(VENV)/bin/pip
 IMAGE_REGISTRY_DOCKERHUB 	?= docker.io
 IMAGE_REGISTRY_GHCR			?= ghcr.io
 IMAGE_REPO					= lonelyglare
-IMAGE_NAME					?= liberando-productos-AMC
+IMAGE_NAME					?= liberando-productos-amc
 VERSION						?= derp
 
 # Variables used to configure docker images registries to build and push
