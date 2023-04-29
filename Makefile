@@ -8,7 +8,7 @@ IMAGE_REGISTRY_GHCR			?= ghcr.io
 IMAGE_ORG_GHCR				?= keepcodingclouddevops7
 IMAGE_REPO					?= lonelyglare
 IMAGE_NAME					?= liberando-productos-amc
-VERSION						?= develop
+VERSION						?= $(shell git rev-parse HEAD)
 
 # Variables used to configure docker images registries to build and push
 ##IMAGE 				= $(IMAGE_REGISTRY_DOCKERHUB)/$(IMAGE_NAME):$(VERSION)
@@ -37,9 +37,7 @@ $(VENV)/bin/activate: requirements.txt
 .PHONY: docker-build
 docker-build: ## Build image
 	docker build -t $(IMAGE_DOCKER):$(VERSION) -t $(IMAGE_GHCR):$(VERSION) 
-	-t $(IMAGE_DOCKER_LATEST) -t $(IMAGE_GHCR_LATEST).
-
-	Echo $(VERSION) 
+	-t $(IMAGE_DOCKER_LATEST) -t $(IMAGE_GHCR_LATEST) .
 ##-t $(IMAGE_GHCR)
 
 .PHONY: publish
