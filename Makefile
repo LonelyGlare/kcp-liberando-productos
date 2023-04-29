@@ -5,6 +5,7 @@ PIP		= $(VENV)/bin/pip
 # Variables used to configure
 IMAGE_REGISTRY_DOCKERHUB 	?= docker.io
 IMAGE_REGISTRY_GHCR			?= ghcr.io
+IMAGE_ORG_GHCR				?= keepcodingclouddevops7
 IMAGE_REPO					= lonelyglare
 IMAGE_NAME					?= liberando-productos-amc
 VERSION						?= derp
@@ -13,8 +14,8 @@ VERSION						?= derp
 ##IMAGE 				= $(IMAGE_REGISTRY_DOCKERHUB)/$(IMAGE_NAME):$(VERSION)
 IMAGE_DOCKER		= $(IMAGE_REGISTRY_DOCKERHUB)/$(IMAGE_REPO)/$(IMAGE_NAME):$(VERSION)
 IMAGE_DOCKER_LATEST	= $(IMAGE_REGISTRY_DOCKERHUB)/$(IMAGE_REPO)/$(IMAGE_NAME):latest
-IMAGE_GHCR			= $(IMAGE_REGISTRY_GHCR)/$(IMAGE_REPO)/$(IMAGE_NAME):$(VERSION)
-IMAGE_GHCR_LATEST	= $(IMAGE_REGISTRY_GHCR)/$(IMAGE_REPO)/$(IMAGE_NAME):latest
+IMAGE_GHCR			= $(IMAGE_REGISTRY_GHCR)/$(IMAGE_ORG_GHCR)/$(IMAGE_REPO)/$(IMAGE_NAME):$(VERSION)
+IMAGE_GHCR_LATEST	= $(IMAGE_REGISTRY_GHCR)/$(IMAGE_ORG_GHCR)/$(IMAGE_REPO)/$(IMAGE_NAME):latest
 
 .PHONY: run
 run: $(VENV)/bin/activate
@@ -35,13 +36,13 @@ $(VENV)/bin/activate: requirements.txt
 
 .PHONY: docker-build
 docker-build: ## Build image
-	docker build -t $(IMAGE_DOCKER_LATEST) . 
-	docker build -t $(IMAGE_GHCR_LATEST) .
+	docker build -t $(IMAGE_DOCKER) . 
+	docker build -t $(IMAGE_GHCR) .
 ##-t $(IMAGE_GHCR)
 
 .PHONY: publish
 publish: docker-build ## Publish image
-#	docker push $(IMAGE_DOCKER)
-	docker push $(IMAGE_DOCKER_LATEST)
-#	docker push $(IMAGE_GHCR)
-	docker push $(IMAGE_GHCR_LATEST)
+	docker push $(IMAGE_DOCKER)
+#	docker push $(IMAGE_DOCKER_LATEST)
+	docker push $(IMAGE_GHCR)
+#	docker push $(IMAGE_GHCR_LATEST)
