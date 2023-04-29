@@ -10,6 +10,7 @@ IMAGE_NAME					?= lb-productos-practica
 VERSION						?= develop
 
 # Variables used to configure docker images registries to build and push
+IMAGE 				= $(IMAGE_REGISTRY_DOCKERHUB)/$(IMAGE_NAME):$(VERSION)
 IMAGE_DOCKER		= $(IMAGE_REGISTRY_DOCKERHUB)/$(IMAGE_REPO)/$(IMAGE_NAME):$(VERSION)
 IMAGE_DOCKER_LATEST	= $(IMAGE_REGISTRY_DOCKERHUB )/$(IMAGE_REPO)/$(IMAGE_NAME):latest
 IMAGE_GHCR			= $(IMAGE_REGISTRY_GHCR)/$(IMAGE_REPO)/$(IMAGE_NAME):$(VERSION)
