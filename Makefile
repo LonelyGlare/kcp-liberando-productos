@@ -7,7 +7,7 @@ IMAGE_REGISTRY_DOCKERHUB 	?=docker.io
 IMAGE_REGISTRY_GHCR			?=ghcr.io
 IMAGE_REPO					=lonelyglare
 IMAGE_NAME					?=lb-productos-practica
-VERSION						?=develop
+VERSION						?=derp
 
 # Variables used to configure docker images registries to build and push
 ##IMAGE 				= $(IMAGE_REGISTRY_DOCKERHUB)/$(IMAGE_NAME):$(VERSION)
