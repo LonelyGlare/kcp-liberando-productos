@@ -3,11 +3,11 @@ PYTHON 	= $(VENV)/bin/python3
 PIP		= $(VENV)/bin/pip
 
 # Variables used to configure
-IMAGE_REGISTRY_DOCKERHUB 	?=docker.io
-IMAGE_REGISTRY_GHCR			?=ghcr.io
-IMAGE_REPO					=lonelyglare
-IMAGE_NAME					?=lb-productos-practica
-VERSION						?=derp
+IMAGE_REGISTRY_DOCKERHUB 	?= docker.io
+IMAGE_REGISTRY_GHCR			?= ghcr.io
+IMAGE_REPO					= lonelyglare
+IMAGE_NAME					?= lb-productos-practica
+VERSION						?= derp
 
 # Variables used to configure docker images registries to build and push
 ##IMAGE 				= $(IMAGE_REGISTRY_DOCKERHUB)/$(IMAGE_NAME):$(VERSION)
