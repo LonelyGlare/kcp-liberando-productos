@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: lonelyglare/lb-productos-practica
+  repository: lonelyglare/liberando-productos-amc
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.2"
+  tag: "latest"
 
 # imagePullSecrets created to use Docker Hub Private Account
 imagePullSecrets:
@@ -111,4 +111,4 @@ mongodb:
     enabled: true
     serviceMonitor:
       enabled: true
-      namespace: "monitoring"
+      namespace: "monitoring-cluster"

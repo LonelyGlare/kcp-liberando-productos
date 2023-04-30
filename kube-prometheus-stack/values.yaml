@@ -14,7 +14,7 @@ kubeEtcd:
 kubeScheduler:
   enabled: false
 kubeApiServer:
-    enabled: true
+  enabled: true
 kubelet:
   enabled: true
 kubeDns:
@@ -106,9 +106,9 @@ alertmanager:
     - name: 'null'
     - name: 'slack'
       slack_configs:
-      - api_url: 'https://hooks.slack.com/services/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' # <--- AÑADIR EN ESTA LÍNEA EL WEBHOOK CREADO
+      - api_url: 'https://hooks.slack.com/services/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' # <--- AÑADIR EN ESTA LÍNEA EL WEBHOOK CREADO
         send_resolved: true
-        channel: '#alarms-notifications' # <--- AÑADIR EN ESTA LÍNEA EL CANAL
+        channel: '#alarms-app' # <--- AÑADIR EN ESTA LÍNEA EL CANAL
         title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] Monitoring Event Notification'
         text: |-
           {{ range .Alerts }}
@@ -116,8 +116,7 @@ alertmanager:
             *Description:* {{ .Annotations.message }}
             *Graph:* <{{ .GeneratorURL }}|:chart_with_upwards_trend:> *Runbook:* <{{ .Annotations.runbook_url }}|:spiral_note_pad:>
             *Details:*
-            {{ range .Labels.SortedPairs }} • *{{ .Name }
-            }:* `{{ .Value }}`
+            {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
             {{ end }}
           {{ end }}
 ## Manages Prometheus and Alertmanager components
@@ -129,18 +128,8 @@ additionalPrometheusRulesMap:
     groups:
       - name: ruleset_1
         rules:
-          - alert: MongoDBDown
-            expr: mongodb_up == 0
-            for: 0m
-            labels:
-              severity: critical
-            annotations:
-              summary: MongoDB Down (instance {{ $labels.instance }})
-              description: "MongoDB instance is down"
-
-          - alert: fastApiConsumingMoreThanRequest
-            expr: avg(container_memory_usage_bytes{container="fast-api-webapp"}) by (pod) > avg(kube_pod_container_resource_requests{resource="memory",container="fast-api-webapp"}) by (pod)
-            for: 0m
+          - alert: fastApiConsumingMoreCPUThanRequest
+            expr: max(rate(container_cpu_usage_seconds_total{namespace="fast-api",pod=~"my-app-fast-api-webapp-.*"}[1m])) by (pod) - max_over_time(kube_pod_container_resource_limits{resource="cpu",namespace="fast-api"}) by (pod) > 0
             labels:
               severity: critical
               alertname: "fast-api-webapp container is consuming more than requested"
@@ -148,9 +137,8 @@ additionalPrometheusRulesMap:
               summary: Pod {{ $labels.pod }} consuming more than requested
               description: "Pod more less than request"
               message: Pod {{ $labels.pod }} is consuming more than requested
-          
-          - alert: fastApiConsumingMoreCPUThanRequest
-            expr: (irate(container_cpu_usage_seconds_total{container="fast-api-webapp"}[5m]) * 100) > avg(kube_pod_container_resource_requests{resource="cpu",container="fast-api-webapp"}) by (pod) * 200
+          - alert: fastApiConsumingMoreRAMThanRequest
+            expr: avg(container_memory_usage_bytes{namespace="fast-api"}) by (pod) > avg(kube_pod_container_resource_requests{resource="memory",namespace="fast-api"}) by (pod)
             for: 0m
             labels:
               severity: critical

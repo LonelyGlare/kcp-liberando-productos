@@ -56,15 +56,9 @@ spec:
             httpGet:
               path: /health
               port: http
-              httpGet:
-              path: /bye  ##Añadir endpoint para prometheus
-              port: http
           readinessProbe:
             httpGet:
               path: /health
-              port: http
-            httpGet:
-              path: /bye  ##Añadir endpoint para prometheus
               port: http  
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
