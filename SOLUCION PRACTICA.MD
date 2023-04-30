@@ -1,5 +1,9 @@
 # Keepcoding-devops-liberando-productos-practica-final - Alejandro Moreno
 
+## Inicio
+
+Se puede utilizar el script inicio-practica.sh para ir generando los recursos necesarios para ejecutar la practica
+
 ## Pipeline
 
 Hay un pipeline que publica las imagenes en dockerHub y GHCR y pasa unos test unitarios que dan cobertura a todo el codigo.
